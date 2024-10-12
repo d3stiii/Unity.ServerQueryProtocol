@@ -1,6 +1,6 @@
 # Unity.ServerQueryProtocol
 
-Unity.ServerQueryProtocol is a C#/.NET implementation of [SQP](https://docs.unity.com/ugs/en-us/manual/game-server-hosting/manual/concepts/sqp) (Server Query Protocol) for [Unity Multiplay](https://unity.com/products/game-server-hosting).
+Unity.ServerQueryProtocol is a C#/.NET Core implementation of [SQP](https://docs.unity.com/ugs/en-us/manual/game-server-hosting/manual/concepts/sqp) (Server Query Protocol) for [Unity Multiplay](https://unity.com/products/game-server-hosting).
 
 Examples
 --------
