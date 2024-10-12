@@ -4,8 +4,6 @@ public static class Program
 {
   public static Task Main(string[] args)
   {
-    const ushort queryPort = 8080;
-
     var serverState = new ServerState
     {
       Port = 25565,
@@ -17,8 +15,11 @@ public static class Program
       MaxPlayers = 10
     };
 
+    const ushort queryPort = 8080;
     var sqpServer = new SqpServer(queryPort, serverState);
     sqpServer.Start();
+    
+    Console.WriteLine($"Query server started using SQP on port: {queryPort}");
 
     return Task.Delay(-1);
   }

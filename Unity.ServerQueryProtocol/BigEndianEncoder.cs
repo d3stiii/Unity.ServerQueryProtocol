@@ -5,6 +5,9 @@ namespace Unity.ServerQueryProtocol;
 
 public class BigEndianEncoder
 {
+  public void Write(BinaryWriter writer, byte value) => 
+    writer.Write(value);
+
   public void Write(BinaryWriter writer, ushort value)
   {
     byte[] buffer = new byte[2];

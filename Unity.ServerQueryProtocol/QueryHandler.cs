@@ -38,7 +38,8 @@ public class QueryHandler
     using var memoryStream = new MemoryStream();
     using (var writer = new BinaryWriter(memoryStream))
     {
-      writer.Write((byte)0);
+      const byte challengeResponseType = 0;
+      _encoder.Write(writer, challengeResponseType);
       _encoder.Write(writer, challengeValue);
     }
 
@@ -55,27 +56,33 @@ public class QueryHandler
 
     if (BinaryPrimitives.ReadUInt32BigEndian(buffer.AsSpan()[1..5]) != expectedChallenge)
       throw new InvalidOperationException("Challenge mismatch");
-    
+
     var protocolVersion = BinaryPrimitives.ReadUInt16BigEndian(buffer.AsSpan()[5..7]);
     if (protocolVersion != 1)
-      throw new InvalidOperationException($"Unsupported sqp version: {protocolVersion}");
+      throw new InvalidOperationException($"Unsupported SQP version: {protocolVersion}");
 
     var requestedChunks = buffer[7];
-    var wantsServerInfo = (requestedChunks & 0x1) > 0;
+    var requestedServerInfo = (requestedChunks & 0x1) > 0;
 
     using var memoryStream = new MemoryStream();
     using (var writer = new BinaryWriter(memoryStream, Encoding.BigEndianUnicode))
     {
-      writer.Write((byte)1);
+      const byte queryResponseType = 1;
+      const byte currentPacket = 0;
+      const byte lastPacket = 0;
+      ushort packetLength = (ushort)(sizeof(uint) + _state.Size());
+
+      _encoder.Write(writer, queryResponseType);
       _encoder.Write(writer, expectedChallenge);
       _encoder.Write(writer, protocolVersion);
-      writer.Write((byte)0);
-      writer.Write((byte)0);
-      _encoder.Write(writer, wantsServerInfo ? (ushort)(sizeof(uint) + _state.Size()) : (ushort)0);
+      _encoder.Write(writer, currentPacket);
+      _encoder.Write(writer, lastPacket);
+      _encoder.Write(writer, requestedServerInfo ? packetLength : (ushort)0);
 
-      if (wantsServerInfo)
+      if (requestedServerInfo)
       {
-        _encoder.Write(writer, (uint)_state.Size());
+        uint chunkLength = _state.Size();
+        _encoder.Write(writer, chunkLength);
         _encoder.Write(writer, _state.CurrentPlayers);
         _encoder.Write(writer, _state.MaxPlayers);
         _encoder.Write(writer, _state.ServerName);

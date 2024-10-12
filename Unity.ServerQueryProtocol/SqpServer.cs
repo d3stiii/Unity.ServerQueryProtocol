@@ -22,8 +22,6 @@ public class SqpServer
 
   public void Start()
   {
-    Console.WriteLine($"Starting query server using SQP on {_port}");
-
     _isRunning = true;
     new Thread(UpdateLoop).Start();
   }
@@ -37,20 +35,10 @@ public class SqpServer
 
       var response = _handler.Handle(receiveResult.RemoteEndPoint.ToString(), buffer);
 
-      if (response == null || response.Length <= 0)
-      {
-        Console.WriteLine("Query response error");
+      if (response.Length <= 0)
         continue;
-      }
 
-      try
-      {
-        _udpClient.Send(response, response.Length, receiveResult.RemoteEndPoint);
-      }
-      catch (Exception ex)
-      {
-        Console.WriteLine("Writing response error " + ex.Message);
-      }
+      _udpClient.Send(response, response.Length, receiveResult.RemoteEndPoint);
     }
   }
 
