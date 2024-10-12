@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ServerQueryProtocol", "Unity.ServerQueryProtocol\Unity.ServerQueryProtocol.csproj", "{6981C54A-2F37-4D92-8190-2F5EE74DA024}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.ServerQueryProtocol.Sample", "Unity.ServerQueryProtocol.Sample\Unity.ServerQueryProtocol.Sample.csproj", "{6316E698-95DD-4200-9A0A-313F67C2E05A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6981C54A-2F37-4D92-8190-2F5EE74DA024}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6981C54A-2F37-4D92-8190-2F5EE74DA024}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6981C54A-2F37-4D92-8190-2F5EE74DA024}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6981C54A-2F37-4D92-8190-2F5EE74DA024}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6316E698-95DD-4200-9A0A-313F67C2E05A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6316E698-95DD-4200-9A0A-313F67C2E05A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6316E698-95DD-4200-9A0A-313F67C2E05A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6316E698-95DD-4200-9A0A-313F67C2E05A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
